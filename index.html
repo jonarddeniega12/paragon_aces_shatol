@@ -2895,6 +2895,8 @@ initLive();
   <style>
 #pa-welcome{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;background:rgba(7,11,34,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-family:Inter,system-ui,-apple-system,sans-serif;color:#eef0ff;opacity:0;transition:opacity .3s}
 #pa-welcome.pa-show{opacity:1}
+    #pa-welcome[hidden]{display:none!important}
+#pa-welcome:not(.pa-show){pointer-events:none}
 #pa-welcome .pa-card{width:100%;max-width:420px;max-height:calc(100dvh - 40px);overflow-y:auto;box-sizing:border-box;padding:28px 22px 22px;border-radius:28px;background:rgba(22,27,78,.92);border:1px solid #4b56b8;box-shadow:0 0 40px rgba(110,90,255,.35);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
 #pa-welcome .pa-logo{width:120px;height:auto;border-radius:22px}
 #pa-welcome .pa-kicker{font-family:'Bebas Neue',Oswald,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#7cf29a}
