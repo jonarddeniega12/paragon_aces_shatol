@@ -2892,5 +2892,53 @@ if(document.fonts) document.fonts.ready.then(sizeCourts);
 render();
 initLive();
 </script>
+  <style>
+#pa-welcome{position:fixed;inset:0;z-index:2147483000;display:flex;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;background:rgba(7,11,34,.55);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font-family:Inter,system-ui,-apple-system,sans-serif;color:#eef0ff;opacity:0;transition:opacity .3s}
+#pa-welcome.pa-show{opacity:1}
+#pa-welcome .pa-card{width:100%;max-width:420px;max-height:calc(100dvh - 40px);overflow-y:auto;box-sizing:border-box;padding:28px 22px 22px;border-radius:28px;background:rgba(22,27,78,.92);border:1px solid #4b56b8;box-shadow:0 0 40px rgba(110,90,255,.35);display:flex;flex-direction:column;align-items:center;gap:14px;text-align:center}
+#pa-welcome .pa-logo{width:120px;height:auto;border-radius:22px}
+#pa-welcome .pa-kicker{font-family:'Bebas Neue',Oswald,Impact,sans-serif;font-size:18px;letter-spacing:4px;color:#7cf29a}
+#pa-welcome h1{margin:0;font-family:'Bebas Neue',Oswald,Impact,sans-serif;font-weight:400;font-size:clamp(32px,10vw,42px);line-height:.95;color:#fff}
+#pa-welcome p{margin:0;font-size:15px;line-height:1.45;color:#c3c8ef}
+#pa-welcome .pa-grid{width:100%;display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+#pa-welcome button{font-family:inherit;color:#fff;cursor:pointer;border-radius:18px;border:1.5px solid #5f6ae0;background:#1d2366;display:flex;align-items:center;justify-content:center;gap:8px}
+#pa-welcome .pa-big{min-height:100px;flex-direction:column;gap:6px}
+#pa-welcome .pa-wide{width:100%;min-height:56px}
+#pa-welcome .pa-name{font-size:17px;font-weight:700}
+#pa-welcome .pa-sub{font-family:'Bebas Neue',Oswald,Impact,sans-serif;font-size:15px;letter-spacing:1px;color:#7cf29a}
+#pa-welcome .pa-watch{width:100%;min-height:50px;border-color:#3a4390;background:transparent;color:#dfe2ff;font-family:'Bebas Neue',Oswald,Impact,sans-serif;font-size:20px;letter-spacing:2px}
+#pa-welcome .pa-ico{font-size:26px;line-height:1}
+</style>
+<div id="pa-welcome" role="dialog" aria-modal="true" hidden>
+<div class="pa-card">
+<img class="pa-logo" alt="Paragon Aces logo">
+<div class="pa-kicker">BADMINTON NIGHT</div>
+<h1>Welcome to the<br>Paragon Aces Family</h1>
+<p>Grab your racket, check in, and let's have fun on court tonight. Pick how you're joining below.</p>
+<div class="pa-grid">
+<button class="pa-big" data-pa="member"><span class="pa-ico">⭐</span><span class="pa-name">Member</span><span class="pa-sub">TAP YOUR NAME</span></button>
+<button class="pa-big" data-pa="guest"><span class="pa-ico">🎟️</span><span class="pa-name">Guest</span><span class="pa-sub">TYPE YOUR NAME</span></button>
+</div>
+<button class="pa-wide" data-pa="organizer"><span class="pa-ico">🔑</span><span class="pa-name">Organizer</span><span class="pa-sub">EMAIL &amp; PASSWORD</span></button>
+<button class="pa-watch" data-pa="watch">JUST WATCH</button>
+</div>
+</div>
+<script>
+(function(){
+var o=document.getElementById('pa-welcome');
+var K={member:'tap your name',guest:'type your name',organizer:'email & password',watch:'just watch'};
+function find(k){var w=K[k],els=document.querySelectorAll('button,a,[role="button"],[onclick],div,li'),b=null;
+for(var i=0;i<els.length;i++){var e=els[i];if(o.contains(e))continue;
+var t=(e.innerText||e.textContent||'').toLowerCase().replace(/\s+/g,' ').trim();
+if(t.indexOf(w)===-1)continue;if(!b||(e.innerText||'').length<(b.innerText||'').length)b=e;}
+return b?(b.closest('button,a,[role="button"],[onclick]')||b):null;}
+function vis(e){return !!e&&e.getClientRects().length>0;}
+var l=document.querySelector('img[src*="logo" i],img[alt*="paragon" i],header img')||document.querySelector('img');
+var im=o.querySelector('.pa-logo');if(l&&l.src)im.src=l.src;else im.remove();
+function hide(){o.classList.remove('pa-show');setTimeout(function(){o.hidden=true;},300);}
+o.addEventListener('click',function(e){var b=e.target.closest('[data-pa]');if(!b)return;var x=find(b.getAttribute('data-pa'));hide();if(x)x.click();});
+var n=0;(function w(){if(vis(find('member'))){o.hidden=false;requestAnimationFrame(function(){o.classList.add('pa-show');});}else if(++n<50)setTimeout(w,100);})();
+})();
+</script>
 </body>
 </html>
